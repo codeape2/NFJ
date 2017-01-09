@@ -1,5 +1,6 @@
 import unittest
 from datagen.datagen import generate_persons
+from datagen.datareader import read_etternavn, read_guttenavn, read_jentenavn
 import itertools
 
 
@@ -17,3 +18,14 @@ class TestDataGen(unittest.TestCase):
 
         p99 = hundred_persons[99]
         self.assertEqual("Ana Fredriksen", p99.name)
+
+    def test_explore_longest_name(self):
+        l_e = self.longest(read_etternavn())
+        l_g = self.longest(read_guttenavn())
+        l_j = self.longest(read_jentenavn())
+
+        self.assertEqual(26, l_e + l_g + 1)
+        self.assertEqual(25, l_e + l_j + 1)
+
+    def longest(self, strlist):
+        return max(len(s) for s in strlist)

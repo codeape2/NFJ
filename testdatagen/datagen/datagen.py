@@ -1,6 +1,7 @@
 from datagen import datareader
 import itertools
 
+
 class PersonData:
     def __init__(self, name, sex, birthdate):
         self.name = name
