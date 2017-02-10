@@ -27,5 +27,13 @@ class TestDataGen(unittest.TestCase):
         self.assertEqual(26, l_e + l_g + 1)
         self.assertEqual(25, l_e + l_j + 1)
 
+    def test_no_duplicates(self):
+        COUNT = 100000
+        lots_of_people = list(itertools.islice(generate_persons(), 0, COUNT))
+        self.assertEqual(COUNT, len(lots_of_people))
+
+        unique_names = set(p.name + p.sex for p in lots_of_people)
+        self.assertEqual(COUNT, len(unique_names))
+
     def longest(self, strlist):
         return max(len(s) for s in strlist)
